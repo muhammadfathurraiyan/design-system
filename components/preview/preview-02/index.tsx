@@ -3,29 +3,43 @@
 import { ActivateAgentDialog } from "@/components/preview/preview-02/cards/activate-agent-dialog";
 import { AnalyticsCard } from "@/components/preview/preview-02/cards/analytics-card";
 import { AnomalyAlert } from "@/components/preview/preview-02/cards/anomaly-alert";
+import { AttachmentCard } from "@/components/preview/preview-02/cards/attachment-card";
 import { BarChartCard } from "@/components/preview/preview-02/cards/bar-chart-card";
 import { BookAppointment } from "@/components/preview/preview-02/cards/book-appointment";
+import { BubbleCard } from "@/components/preview/preview-02/cards/bubble-card";
+import { CodeBlockCard } from "@/components/preview/preview-02/cards/code-block-card";
 import { CodespacesCard } from "@/components/preview/preview-02/cards/codespaces-card";
+import { CommandMenuCard } from "@/components/preview/preview-02/cards/command-menu-card";
 import { ContributionsActivity } from "@/components/preview/preview-02/cards/contributions-activity";
 import { Contributors } from "@/components/preview/preview-02/cards/contributors";
+import { DirectionCard } from "@/components/preview/preview-02/cards/direction-card";
 import { EnvironmentVariables } from "@/components/preview/preview-02/cards/environment-variables";
 import { FeedbackForm } from "@/components/preview/preview-02/cards/feedback-form";
 import { FileUpload } from "@/components/preview/preview-02/cards/file-upload";
 import { GithubProfile } from "@/components/preview/preview-02/cards/github-profile";
 import { IconPreviewGrid } from "@/components/preview/preview-02/cards/icon-preview-grid";
+import { InputOtpCard } from "@/components/preview/preview-02/cards/input-otp-card";
 import { InviteTeam } from "@/components/preview/preview-02/cards/invite-team";
 import { Invoice } from "@/components/preview/preview-02/cards/invoice";
 import { LiveWaveformCard } from "@/components/preview/preview-02/cards/live-waveform";
+import { MarkerCard } from "@/components/preview/preview-02/cards/marker-card";
+import { MenubarCard } from "@/components/preview/preview-02/cards/menubar-card";
+import { MessageCard } from "@/components/preview/preview-02/cards/message-card";
+import { MessageScrollerCard } from "@/components/preview/preview-02/cards/message-scroller-card";
+import { NavigationMenuCard } from "@/components/preview/preview-02/cards/navigation-menu-card";
 import { NoTeamMembers } from "@/components/preview/preview-02/cards/no-team-members";
 import { NotFound } from "@/components/preview/preview-02/cards/not-found";
 import { ObservabilityCard } from "@/components/preview/preview-02/cards/observability-card";
 import { PieChartCard } from "@/components/preview/preview-02/cards/pie-chart-card";
+import { QuestionnaireCard } from "@/components/preview/preview-02/cards/questionnaire-card";
 import { ReportBug } from "@/components/preview/preview-02/cards/report-bug";
 import { ShippingAddress } from "@/components/preview/preview-02/cards/shipping-address";
 import { Shortcuts } from "@/components/preview/preview-02/cards/shortcuts";
 import { SkeletonLoading } from "@/components/preview/preview-02/cards/skeleton-loading";
 import { SleepReport } from "@/components/preview/preview-02/cards/sleep-report";
 import { StyleOverview } from "@/components/preview/preview-02/cards/style-overview";
+import { ToastCard } from "@/components/preview/preview-02/cards/toast-card";
+import { TraceCard } from "@/components/preview/preview-02/cards/trace-card";
 import { TypographySpecimen } from "@/components/preview/preview-02/cards/typography-specimen";
 import { UIElements } from "@/components/preview/preview-02/cards/ui-elements";
 import { UsageCard } from "@/components/preview/preview-02/cards/usage-card";
@@ -48,6 +62,8 @@ export function Preview02() {
             </div>
             <CodespacesCard />
             <Invoice />
+            <NavigationMenuCard />
+            <ToastCard />
           </div>
           <div className="flex flex-col p-px [contain-intrinsic-size:380px_1200px] [content-visibility:auto]">
             <IconPreviewGrid />
@@ -56,12 +72,16 @@ export function Preview02() {
             </div>
             <ObservabilityCard />
             <ShippingAddress />
+            <CommandMenuCard />
+            <MenubarCard />
           </div>
           <div className="flex flex-col p-px [contain-intrinsic-size:380px_1200px] [content-visibility:auto]">
             <EnvironmentVariables />
             <BarChartCard />
             <InviteTeam />
             <ActivateAgentDialog />
+            <InputOtpCard />
+            <QuestionnaireCard />
           </div>
           <div className="flex flex-col p-px [contain-intrinsic-size:380px_1200px] [content-visibility:auto]">
             <SkeletonLoading />
@@ -69,12 +89,16 @@ export function Preview02() {
             <NoTeamMembers />
             <ReportBug />
             <Contributors />
+            <DirectionCard />
+            <CodeBlockCard />
           </div>
           <div className="flex flex-col p-px [contain-intrinsic-size:380px_1200px] [content-visibility:auto]">
             <FeedbackForm />
             <BookAppointment />
             <SleepReport />
             <GithubProfile />
+            <MarkerCard />
+            <TraceCard />
           </div>
           <div className="flex flex-col p-px [contain-intrinsic-size:380px_1200px] [content-visibility:auto]">
             <WeeklyFitnessSummary />
@@ -82,6 +106,8 @@ export function Preview02() {
             <AnalyticsCard />
             <UsageCard />
             <Shortcuts />
+            <AttachmentCard />
+            <BubbleCard />
           </div>
           <div className="flex flex-col p-px [contain-intrinsic-size:380px_1200px] [content-visibility:auto]">
             <AnomalyAlert />
@@ -89,6 +115,8 @@ export function Preview02() {
             <Visitors />
             <ContributionsActivity />
             <NotFound />
+            <MessageCard />
+            <MessageScrollerCard />
           </div>
         </div>
       </div>
