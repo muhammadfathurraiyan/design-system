@@ -1,59 +1,66 @@
-import { Card, CardContent } from "@/components/ui/card"
 import {
   Bubble,
   BubbleContent,
   BubbleGroup,
   BubbleReactions,
-} from "@/components/ui/bubble"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { RiHeartLine, RiThumbUpLine } from "@remixicon/react"
+} from "@/components/ui/bubble";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export function BubbleCard() {
   return (
     <Card>
+      <CardHeader>
+        <CardTitle>Bubble</CardTitle>
+        <CardDescription>
+          Displays conversational content in a message bubble. Supports
+          variants, alignment, grouping, reactions, and collapsible content.
+        </CardDescription>
+      </CardHeader>
       <CardContent>
-        <div className="flex flex-col gap-3">
-          <span className="text-sm font-medium">Bubble</span>
+        <div className="flex w-full flex-col gap-8 pb-8">
+          <Bubble align="end">
+            <BubbleContent>Hey there! what&apos;s up?</BubbleContent>
+          </Bubble>
           <BubbleGroup>
             <Bubble variant="muted">
-              <BubbleContent>Did the payout batch clear?</BubbleContent>
-            </Bubble>
-            <Bubble variant="default" align="end">
-              <BubbleContent>
-                Yes — $12,400 landed in the operating account.
-              </BubbleContent>
+              <BubbleContent>Hey! Want to see chat bubbles?</BubbleContent>
             </Bubble>
             <Bubble variant="muted">
-              <BubbleContent>Nice. Any retries left over?</BubbleContent>
-              <BubbleReactions side="bottom" align="start">
-                <RiThumbUpLine className="size-3.5" />
-                <span className="text-xs">2</span>
-              </BubbleReactions>
-            </Bubble>
-            <Bubble variant="tinted" align="end">
               <BubbleContent>
-                Two webhooks retried, both succeeded on the second attempt.
+                I can group messages, switch sides, and keep the whole thread
+                easy to scan.
               </BubbleContent>
-              <BubbleReactions side="bottom" align="end">
-                <RiHeartLine className="size-3.5" />
+              <BubbleReactions role="img" aria-label="Reaction: thumbs up">
+                <span>👍</span>
               </BubbleReactions>
-            </Bubble>
-            <Bubble variant="outline">
-              <div className="flex items-center gap-2">
-                <Avatar className="size-6">
-                  <AvatarFallback>JD</AvatarFallback>
-                </Avatar>
-                <BubbleContent>Forwarding the receipt now.</BubbleContent>
-              </div>
-            </Bubble>
-            <Bubble variant="ghost" align="end">
-              <BubbleContent className="text-xs text-muted-foreground">
-                Edited · 2 minutes ago
-              </BubbleContent>
             </Bubble>
           </BubbleGroup>
+          <Bubble align="end">
+            <BubbleContent>Sure. Hit me with your best demo.</BubbleContent>
+          </Bubble>
+          <Bubble variant="muted">
+            <BubbleContent>
+              Yes. You are reading a demo that is demoing itself. Very meta.
+              Very on-brand.
+            </BubbleContent>
+            <BubbleReactions
+              role="img"
+              aria-label="Reactions: thumbs up, fire, eyes, and 2 more"
+            >
+              <span>👍</span>
+              <span>🔥</span>
+              <span>👀</span>
+              <span>+2</span>
+            </BubbleReactions>
+          </Bubble>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

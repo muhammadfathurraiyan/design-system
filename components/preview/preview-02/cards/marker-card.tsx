@@ -1,52 +1,50 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Marker, MarkerContent, MarkerIcon } from "@/components/ui/marker"
-import { Badge } from "@/components/ui/badge"
 import {
-  RiCheckboxCircleLine,
-  RiErrorWarningLine,
-  RiLoaderLine,
-  RiTimeLine,
-} from "@remixicon/react"
-
-const steps = [
-  { icon: RiCheckboxCircleLine, label: "Identity verified", meta: "2m ago" },
-  { icon: RiCheckboxCircleLine, label: "Bank account linked", meta: "4m ago" },
-  { icon: RiLoaderLine, label: "Reviewing documents", meta: "in progress" },
-  { icon: RiTimeLine, label: "Activating payouts", meta: "queued" },
-  { icon: RiErrorWarningLine, label: "Tax form missing", meta: "action needed" },
-]
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Marker, MarkerContent, MarkerIcon } from "@/components/ui/marker";
+import { Spinner } from "@/components/ui/spinner";
+import {
+  RiGitBranchLine,
+  RiSeoLine
+} from "@remixicon/react";
 
 export function MarkerCard() {
   return (
     <Card>
+      <CardHeader>
+        <CardTitle>Marker</CardTitle>
+        <CardDescription>
+          Displays an inline status, system note, bordered row, or labeled
+          separator in a conversation.
+        </CardDescription>
+      </CardHeader>
       <CardContent>
-        <div className="flex flex-col gap-3">
-          <span className="text-sm font-medium">Marker</span>
-          <div className="flex flex-col gap-1">
-            {steps.map((step) => (
-              <Marker key={step.label}>
-                <MarkerIcon>
-                  <step.icon />
-                </MarkerIcon>
-                <MarkerContent>{step.label}</MarkerContent>
-                <span className="ml-auto text-xs text-muted-foreground">
-                  {step.meta}
-                </span>
-              </Marker>
-            ))}
-          </div>
-          <Marker variant="separator">
-            <MarkerContent>Today</MarkerContent>
-          </Marker>
-          <Marker variant="border">
-            <MarkerIcon>
-              <RiCheckboxCircleLine />
-            </MarkerIcon>
-            <MarkerContent>Border variant</MarkerContent>
-            <Badge variant="secondary">new</Badge>
-          </Marker>
-        </div>
+        <Marker>
+          <MarkerIcon>
+            <RiGitBranchLine />
+          </MarkerIcon>
+          <MarkerContent>Switched to a new branch</MarkerContent>
+        </Marker>
+        <Marker role="status">
+          <MarkerIcon>
+            <Spinner />
+          </MarkerIcon>
+          <MarkerContent className="shimmer">Thinking...</MarkerContent>
+        </Marker>
+        <Marker variant="separator">
+          <MarkerContent>Conversation compacted</MarkerContent>
+        </Marker>
+        <Marker>
+          <MarkerIcon>
+            <RiSeoLine />
+          </MarkerIcon>
+          <MarkerContent>Explored 4 files</MarkerContent>
+        </Marker>
       </CardContent>
     </Card>
-  )
+  );
 }

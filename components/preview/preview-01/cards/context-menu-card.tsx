@@ -1,7 +1,5 @@
 "use client";
 
-import * as React from "react";
-
 import {
   Card,
   CardContent,
@@ -26,15 +24,7 @@ import {
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
 
-const files = [
-  { id: "statement", name: "statement-q3.csv", meta: "24 KB" },
-  { id: "payouts", name: "payouts-august.csv", meta: "18 KB" },
-  { id: "ledger", name: "ledger-export.xlsx", meta: "112 KB" },
-];
-
 export function ContextMenuCard() {
-  const [selected, setSelected] = React.useState(files[0].id);
-
   return (
     <Card>
       <CardHeader>

@@ -1,82 +1,150 @@
-import { Card, CardContent } from "@/components/ui/card"
+"use client";
+
+import * as React from "react";
+
+import {
+  Card,
+  CardContent
+} from "@/components/ui/card";
 import {
   Questionnaire,
   QuestionnaireActions,
   QuestionnaireChoice,
-  QuestionnaireChoiceDescription,
   QuestionnaireChoices,
   QuestionnaireDescription,
+  QuestionnaireError,
+  QuestionnaireInput,
   QuestionnaireItem,
   QuestionnaireNext,
   QuestionnairePrevious,
   QuestionnaireProgress,
+  QuestionnaireSkip,
   QuestionnaireSubmit,
   QuestionnaireTitle,
-} from "@/components/ui/questionnaire"
+} from "@/components/ui/questionnaire";
+import { toast } from "@/components/ui/toast";
+
+const questionnaireItems = [
+  {
+    choices: [
+      {
+        description: "Show what the agent ran and what came back.",
+        label: "Tool call timeline",
+        value: "tool-calls",
+      },
+      {
+        description: "Ask before sensitive or destructive actions.",
+        label: "Approval checkpoints",
+        value: "approvals",
+      },
+      {
+        description: "Make delegated work and results easier to follow.",
+        label: "Sub-agent handoffs",
+        value: "handoffs",
+      },
+    ],
+    description: "Choose a direction or describe another task.",
+    input: {
+      label: "Another agent feature",
+      placeholder: "Describe another feature…",
+    },
+    name: "direction",
+    required: true,
+    title: "What should the agent build next?",
+  },
+  {
+    choices: [
+      { label: "Progress", value: "progress" },
+      { label: "Decisions", value: "decisions" },
+      { label: "Risks", value: "risks" },
+      { label: "Next step", value: "next-step" },
+    ],
+    description: "Select all that apply, or skip this question.",
+    multiple: true,
+    name: "signals",
+    required: false,
+    title: "What should every progress update include?",
+  },
+  {
+    choices: [
+      { label: "Start now", value: "now" },
+      { label: "Next development cycle", value: "next-cycle" },
+      { label: "Add it to the backlog", value: "backlog" },
+    ],
+    description: "Choose when the agent should begin the work.",
+    name: "timing",
+    required: true,
+    title: "When should work begin?",
+  },
+] as const;
 
 export function QuestionnaireCard() {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const answers = {
+      direction: formData.get("direction"),
+      signals: formData.getAll("signals"),
+      timing: formData.get("timing"),
+    };
+
+    toast.add({
+      type: "Agent plan saved",
+      description: `Direction: ${answers.direction ?? "None"} · Progress signals: ${answers.signals.join(", ") || "None"} · Timing: ${answers.timing ?? "None"}`,
+    });
+  }
+
   return (
     <Card>
       <CardContent>
-        <Questionnaire shortcuts="letters" className="gap-4">
+        <Questionnaire
+          defaultItem="direction"
+          items={questionnaireItems}
+          shortcuts="letters"
+          onSubmit={handleSubmit}
+        >
           <QuestionnaireProgress />
-          <QuestionnaireItem name="payout-speed" required>
-            <QuestionnaireTitle>
-              How fast should payouts settle?
-            </QuestionnaireTitle>
-            <QuestionnaireDescription>
-              You can change this later in payout settings.
-            </QuestionnaireDescription>
-            <QuestionnaireChoices>
-              <QuestionnaireChoice value="instant">
-                Instant
-                <QuestionnaireChoiceDescription>
-                  Arrives in seconds · 1.5% fee
-                </QuestionnaireChoiceDescription>
-              </QuestionnaireChoice>
-              <QuestionnaireChoice value="same-day">
-                Same day
-                <QuestionnaireChoiceDescription>
-                  Before 17:00 local · 0.5% fee
-                </QuestionnaireChoiceDescription>
-              </QuestionnaireChoice>
-              <QuestionnaireChoice value="standard">
-                Standard
-                <QuestionnaireChoiceDescription>
-                  Next business day · no fee
-                </QuestionnaireChoiceDescription>
-              </QuestionnaireChoice>
-            </QuestionnaireChoices>
-            <QuestionnaireActions>
-              <QuestionnairePrevious />
-              <QuestionnaireNext />
-            </QuestionnaireActions>
-          </QuestionnaireItem>
-          <QuestionnaireItem name="threshold">
-            <QuestionnaireTitle>
-              When should we release funds?
-            </QuestionnaireTitle>
-            <QuestionnaireChoices>
-              <QuestionnaireChoice value="auto">
-                Automatically
-                <QuestionnaireChoiceDescription>
-                  Every closing batch
-                </QuestionnaireChoiceDescription>
-              </QuestionnaireChoice>
-              <QuestionnaireChoice value="manual">
-                Manually
-                <QuestionnaireChoiceDescription>
-                  Approve each transfer
-                </QuestionnaireChoiceDescription>
-              </QuestionnaireChoice>
-            </QuestionnaireChoices>
-            <QuestionnaireActions>
-              <QuestionnairePrevious />
-              <QuestionnaireSubmit>Finish</QuestionnaireSubmit>
-            </QuestionnaireActions>
-          </QuestionnaireItem>
+          {questionnaireItems.map((question) => (
+            <QuestionnaireItem
+              key={question.name}
+              multiple={"multiple" in question && question.multiple}
+              name={question.name}
+              required={question.required}
+            >
+              <QuestionnaireTitle>{question.title}</QuestionnaireTitle>
+              <QuestionnaireDescription>
+                {question.description}
+              </QuestionnaireDescription>
+              <QuestionnaireChoices>
+                {question.choices.map((choice) => (
+                  <QuestionnaireChoice key={choice.value} value={choice.value}>
+                    <span className="font-medium">{choice.label}</span>
+                    {"description" in choice ? (
+                      <span className="text-muted-foreground">
+                        {choice.description}
+                      </span>
+                    ) : null}
+                  </QuestionnaireChoice>
+                ))}
+                {"input" in question ? (
+                  <QuestionnaireInput
+                    aria-label={question.input.label}
+                    placeholder={question.input.placeholder}
+                  />
+                ) : null}
+              </QuestionnaireChoices>
+              <QuestionnaireError />
+            </QuestionnaireItem>
+          ))}
+          <QuestionnaireActions>
+            <QuestionnairePrevious />
+            <QuestionnaireSkip />
+            <QuestionnaireNext>Next</QuestionnaireNext>
+            <QuestionnaireSubmit>Save plan</QuestionnaireSubmit>
+          </QuestionnaireActions>
         </Questionnaire>
       </CardContent>
     </Card>
-  )
+  );
 }

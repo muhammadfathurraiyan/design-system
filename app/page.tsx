@@ -1,8 +1,6 @@
 import { ModeToggle } from "@/components/mode-toggle";
 import { DesignSystemPreview } from "@/components/preview/design-system-preview";
-import { buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { RiQuillPenLine } from "@remixicon/react";
 import { Suspense } from "react";
 
 export default function Home() {

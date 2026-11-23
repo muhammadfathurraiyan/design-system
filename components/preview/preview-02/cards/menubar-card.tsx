@@ -1,15 +1,20 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 
-import { Card, CardContent } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import {
   Menubar,
   MenubarCheckboxItem,
   MenubarContent,
   MenubarGroup,
   MenubarItem,
-  MenubarLabel,
   MenubarMenu,
   MenubarRadioGroup,
   MenubarRadioItem,
@@ -19,77 +24,135 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from "@/components/ui/menubar"
+} from "@/components/ui/menubar";
 
 export function MenubarCard() {
-  const [sort, setSort] = React.useState("date")
-  const [showArchived, setShowArchived] = React.useState(false)
-
   return (
     <Card>
+      <CardHeader>
+        <CardTitle>Menubar</CardTitle>
+        <CardDescription>
+          A visually persistent menu common in desktop applications that
+          provides quick access to a consistent set of commands.
+        </CardDescription>
+      </CardHeader>
       <CardContent>
-        <div className="flex flex-col gap-3">
-          <span className="text-sm font-medium">Menubar</span>
-          <Menubar>
-            <MenubarMenu>
-              <MenubarTrigger>File</MenubarTrigger>
-              <MenubarContent>
+        <Menubar className="w-fit">
+          <MenubarMenu>
+            <MenubarTrigger>File</MenubarTrigger>
+            <MenubarContent>
+              <MenubarGroup>
                 <MenubarItem>
-                  New invoice
-                  <MenubarShortcut>⌘N</MenubarShortcut>
+                  New Tab <MenubarShortcut>⌘T</MenubarShortcut>
                 </MenubarItem>
                 <MenubarItem>
-                  Import ledger
-                  <MenubarShortcut>⌘I</MenubarShortcut>
+                  New Window <MenubarShortcut>⌘N</MenubarShortcut>
                 </MenubarItem>
-                <MenubarSeparator />
+                <MenubarItem disabled>New Incognito Window</MenubarItem>
+              </MenubarGroup>
+              <MenubarSeparator />
+              <MenubarGroup>
                 <MenubarSub>
-                  <MenubarSubTrigger>Export</MenubarSubTrigger>
+                  <MenubarSubTrigger>Share</MenubarSubTrigger>
                   <MenubarSubContent>
-                    <MenubarItem>CSV</MenubarItem>
-                    <MenubarItem>PDF</MenubarItem>
-                    <MenubarItem>JSON</MenubarItem>
+                    <MenubarGroup>
+                      <MenubarItem>Email link</MenubarItem>
+                      <MenubarItem>Messages</MenubarItem>
+                      <MenubarItem>Notes</MenubarItem>
+                    </MenubarGroup>
                   </MenubarSubContent>
                 </MenubarSub>
-                <MenubarSeparator />
-                <MenubarItem variant="destructive">Close workspace</MenubarItem>
-              </MenubarContent>
-            </MenubarMenu>
-            <MenubarMenu>
-              <MenubarTrigger>View</MenubarTrigger>
-              <MenubarContent>
-                <MenubarRadioGroup value={sort} onValueChange={setSort}>
-                  <MenubarLabel>Sort by</MenubarLabel>
-                  <MenubarRadioItem value="date">Date</MenubarRadioItem>
-                  <MenubarRadioItem value="amount">Amount</MenubarRadioItem>
-                  <MenubarRadioItem value="name">Name</MenubarRadioItem>
-                </MenubarRadioGroup>
-                <MenubarSeparator />
-                <MenubarCheckboxItem
-                  checked={showArchived}
-                  onCheckedChange={(checked) => setShowArchived(!!checked)}
-                >
-                  Show archived
-                </MenubarCheckboxItem>
-              </MenubarContent>
-            </MenubarMenu>
-            <MenubarMenu>
-              <MenubarTrigger>Help</MenubarTrigger>
-              <MenubarContent>
-                <MenubarGroup>
-                  <MenubarItem>Documentation</MenubarItem>
-                  <MenubarItem>Keyboard shortcuts</MenubarItem>
-                  <MenubarItem>Contact support</MenubarItem>
-                </MenubarGroup>
-              </MenubarContent>
-            </MenubarMenu>
-          </Menubar>
-          <p className="text-xs text-muted-foreground">
-            Sorting by <span className="text-foreground">{sort}</span>
-            {showArchived ? ", archived included" : ""}.
-          </p>
-        </div>
+              </MenubarGroup>
+              <MenubarSeparator />
+              <MenubarGroup>
+                <MenubarItem>
+                  Print... <MenubarShortcut>⌘P</MenubarShortcut>
+                </MenubarItem>
+              </MenubarGroup>
+            </MenubarContent>
+          </MenubarMenu>
+          <MenubarMenu>
+            <MenubarTrigger>Edit</MenubarTrigger>
+            <MenubarContent>
+              <MenubarGroup>
+                <MenubarItem>
+                  Undo <MenubarShortcut>⌘Z</MenubarShortcut>
+                </MenubarItem>
+                <MenubarItem>
+                  Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>
+                </MenubarItem>
+              </MenubarGroup>
+              <MenubarSeparator />
+              <MenubarGroup>
+                <MenubarSub>
+                  <MenubarSubTrigger>Find</MenubarSubTrigger>
+                  <MenubarSubContent>
+                    <MenubarGroup>
+                      <MenubarItem>Search the web</MenubarItem>
+                    </MenubarGroup>
+                    <MenubarSeparator />
+                    <MenubarGroup>
+                      <MenubarItem>Find...</MenubarItem>
+                      <MenubarItem>Find Next</MenubarItem>
+                      <MenubarItem>Find Previous</MenubarItem>
+                    </MenubarGroup>
+                  </MenubarSubContent>
+                </MenubarSub>
+              </MenubarGroup>
+              <MenubarSeparator />
+              <MenubarGroup>
+                <MenubarItem>Cut</MenubarItem>
+                <MenubarItem>Copy</MenubarItem>
+                <MenubarItem>Paste</MenubarItem>
+              </MenubarGroup>
+            </MenubarContent>
+          </MenubarMenu>
+          <MenubarMenu>
+            <MenubarTrigger>View</MenubarTrigger>
+            <MenubarContent className="w-44">
+              <MenubarGroup>
+                <MenubarCheckboxItem>Bookmarks Bar</MenubarCheckboxItem>
+                <MenubarCheckboxItem checked>Full URLs</MenubarCheckboxItem>
+              </MenubarGroup>
+              <MenubarSeparator />
+              <MenubarGroup>
+                <MenubarItem inset>
+                  Reload <MenubarShortcut>⌘R</MenubarShortcut>
+                </MenubarItem>
+                <MenubarItem disabled inset>
+                  Force Reload <MenubarShortcut>⇧⌘R</MenubarShortcut>
+                </MenubarItem>
+              </MenubarGroup>
+              <MenubarSeparator />
+              <MenubarGroup>
+                <MenubarItem inset>Toggle Fullscreen</MenubarItem>
+              </MenubarGroup>
+              <MenubarSeparator />
+              <MenubarGroup>
+                <MenubarItem inset>Hide Sidebar</MenubarItem>
+              </MenubarGroup>
+            </MenubarContent>
+          </MenubarMenu>
+          <MenubarMenu>
+            <MenubarTrigger>Profiles</MenubarTrigger>
+            <MenubarContent>
+              <MenubarRadioGroup value="benoit">
+                <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
+                <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
+                <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
+              </MenubarRadioGroup>
+              <MenubarSeparator />
+              <MenubarGroup>
+                <MenubarItem inset>Edit...</MenubarItem>
+              </MenubarGroup>
+              <MenubarSeparator />
+              <MenubarGroup>
+                <MenubarItem inset>Add Profile...</MenubarItem>
+              </MenubarGroup>
+            </MenubarContent>
+          </MenubarMenu>
+        </Menubar>
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -26,7 +26,6 @@ import { MarkerCard } from "@/components/preview/preview-02/cards/marker-card";
 import { MenubarCard } from "@/components/preview/preview-02/cards/menubar-card";
 import { MessageCard } from "@/components/preview/preview-02/cards/message-card";
 import { MessageScrollerCard } from "@/components/preview/preview-02/cards/message-scroller-card";
-import { NavigationMenuCard } from "@/components/preview/preview-02/cards/navigation-menu-card";
 import { NoTeamMembers } from "@/components/preview/preview-02/cards/no-team-members";
 import { NotFound } from "@/components/preview/preview-02/cards/not-found";
 import { ObservabilityCard } from "@/components/preview/preview-02/cards/observability-card";
@@ -62,8 +61,9 @@ export function Preview02() {
             </div>
             <CodespacesCard />
             <Invoice />
-            <NavigationMenuCard />
+            <MenubarCard />
             <ToastCard />
+            <BubbleCard />
           </div>
           <div className="flex flex-col p-px [contain-intrinsic-size:380px_1200px] [content-visibility:auto]">
             <IconPreviewGrid />
@@ -73,7 +73,6 @@ export function Preview02() {
             <ObservabilityCard />
             <ShippingAddress />
             <CommandMenuCard />
-            <MenubarCard />
           </div>
           <div className="flex flex-col p-px [contain-intrinsic-size:380px_1200px] [content-visibility:auto]">
             <EnvironmentVariables />
@@ -107,7 +106,6 @@ export function Preview02() {
             <UsageCard />
             <Shortcuts />
             <AttachmentCard />
-            <BubbleCard />
           </div>
           <div className="flex flex-col p-px [contain-intrinsic-size:380px_1200px] [content-visibility:auto]">
             <AnomalyAlert />

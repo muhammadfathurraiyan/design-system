@@ -18,6 +18,7 @@ import { HoverCardDemo } from "./cards/hover-card-demo";
 import { IndexInvesting } from "./cards/index-investing";
 import { KitchenIsland } from "./cards/kitchen-island";
 import { LoadingCard } from "./cards/loading-card";
+import { NavigationMenuCard } from "./cards/navigation-menu-card";
 import { NewMilestone } from "./cards/new-milestone";
 import { NotificationSettings } from "./cards/notification-settings";
 import { PaginationCard } from "./cards/pagination-card";
@@ -85,6 +86,7 @@ export function Preview01() {
               </div>
             </div>
             <ReleaseCatalog />
+            <NavigationMenuCard />
             <AspectRatioCard />
           </div>
           <div className="flex flex-col p-px [contain-intrinsic-size:380px_1200px] [content-visibility:auto]">

@@ -1,5 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import {
   Attachment,
   AttachmentAction,
@@ -9,123 +7,92 @@ import {
   AttachmentGroup,
   AttachmentMedia,
   AttachmentTitle,
-} from "@/components/ui/attachment"
+} from "@/components/ui/attachment";
 import {
-  RiCloseLine,
-  RiDownloadLine,
-  RiErrorWarningLine,
-  RiFileTextLine,
-  RiImageLine,
-  RiLoaderLine,
-  RiMoreLine,
-} from "@remixicon/react"
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Spinner } from "@/components/ui/spinner";
+import { RiCloseLine, RiFile2Line } from "@remixicon/react";
+import Image from "next/image";
 
-const files = [
+const images = [
   {
-    title: "Q3-statement.pdf",
-    description: "2.4 MB · Uploaded",
-    state: "done" as const,
-    icon: RiFileTextLine,
+    name: "workspace.png",
+    meta: "PNG · 820 KB",
+    src: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900&auto=format&fit=crop&q=80",
+    alt: "Workspace",
   },
   {
-    title: "payroll-run.csv",
-    description: "Uploading 68%",
-    state: "uploading" as const,
-    icon: RiLoaderLine,
+    name: "desk-reference.jpg",
+    meta: "JPG · 1.1 MB",
+    src: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=900&auto=format&fit=crop&q=80",
+    alt: "Desk",
   },
   {
-    title: "receipt-scan.png",
-    description: "Processing OCR",
-    state: "processing" as const,
-    icon: RiImageLine,
+    name: "office-reference.jpg",
+    meta: "JPG · 940 KB",
+    src: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=900&auto=format&fit=crop&q=80",
+    alt: "Office",
   },
-  {
-    title: "invoice-0921.pdf",
-    description: "Failed — too large",
-    state: "error" as const,
-    icon: RiErrorWarningLine,
-  },
-]
+];
 
 export function AttachmentCard() {
   return (
-    <Card>
+    <Card className="mx-auto flex w-full flex-col gap-3">
+      <CardHeader>
+        <CardTitle>Attachment</CardTitle>
+        <CardDescription>
+          Displays a file or image attachment with media, metadata, upload
+          state, and actions.
+        </CardDescription>
+      </CardHeader>
       <CardContent>
-        <div className="flex flex-col gap-3">
-          <div className="flex items-center justify-between gap-2">
-            <span className="text-sm font-medium">Attachment</span>
-            <Button size="xs" variant="outline">
-              Add file
-            </Button>
-          </div>
-          <div className="flex flex-col gap-2">
-            {files.map((file) => (
-              <Attachment key={file.title} state={file.state}>
-                <AttachmentMedia variant="icon">
-                  <file.icon />
-                </AttachmentMedia>
-                <AttachmentContent>
-                  <AttachmentTitle>{file.title}</AttachmentTitle>
-                  <AttachmentDescription>
-                    {file.description}
-                  </AttachmentDescription>
-                </AttachmentContent>
-                <AttachmentActions>
-                  <AttachmentAction aria-label="Download">
-                    <RiDownloadLine />
-                  </AttachmentAction>
-                  <AttachmentAction aria-label="Remove">
-                    <RiCloseLine />
-                  </AttachmentAction>
-                </AttachmentActions>
-              </Attachment>
-            ))}
-          </div>
-          <div className="flex flex-col gap-2">
-            <span className="text-xs text-muted-foreground">
-              Compact · horizontal group
-            </span>
-            <AttachmentGroup>
-              {["ledger.xlsx", "payouts.csv"].map((name) => (
-                <Attachment key={name} size="xs">
-                  <AttachmentMedia variant="icon">
-                    <RiFileTextLine />
-                  </AttachmentMedia>
-                  <AttachmentContent>
-                    <AttachmentTitle>{name}</AttachmentTitle>
-                    <AttachmentDescription>Ready</AttachmentDescription>
-                  </AttachmentContent>
-                  <AttachmentActions>
-                    <AttachmentAction aria-label="More">
-                      <RiMoreLine />
-                    </AttachmentAction>
-                  </AttachmentActions>
-                </Attachment>
-              ))}
-            </AttachmentGroup>
-          </div>
-          <div className="flex flex-col gap-2">
-            <span className="text-xs text-muted-foreground">Vertical</span>
-            <div className="flex gap-2">
-              {files.slice(0, 2).map((file) => (
-                <Attachment
-                  key={file.title}
-                  orientation="vertical"
-                  size="xs"
-                  state={file.state}
-                >
-                  <AttachmentMedia variant="icon">
-                    <file.icon />
-                  </AttachmentMedia>
-                  <AttachmentContent>
-                    <AttachmentTitle>{file.title}</AttachmentTitle>
-                  </AttachmentContent>
-                </Attachment>
-              ))}
-            </div>
-          </div>
-        </div>
+        <AttachmentGroup>
+          {images.map((image) => (
+            <Attachment key={image.name} orientation="vertical">
+              <AttachmentMedia variant="image">
+                <Image src={image.src} alt={image.alt} width={500} height={500} className="w-full h-full object-cover" />
+              </AttachmentMedia>
+              <AttachmentContent>
+                <AttachmentTitle>{image.name}</AttachmentTitle>
+                <AttachmentDescription>{image.meta}</AttachmentDescription>
+              </AttachmentContent>
+            </Attachment>
+          ))}
+        </AttachmentGroup>
+        <Attachment state="uploading" className="w-full">
+          <AttachmentMedia>
+            <Spinner />
+          </AttachmentMedia>
+          <AttachmentContent>
+            <AttachmentTitle>sales-dashboard.pdf</AttachmentTitle>
+            <AttachmentDescription>Uploading · 64%</AttachmentDescription>
+          </AttachmentContent>
+          <AttachmentActions>
+            <AttachmentAction aria-label="Cancel upload">
+              <RiCloseLine />
+            </AttachmentAction>
+          </AttachmentActions>
+        </Attachment>
+        <Attachment className="w-full">
+          <AttachmentMedia>
+            <RiFile2Line />
+          </AttachmentMedia>
+          <AttachmentContent>
+            <AttachmentTitle>message-renderer.tsx</AttachmentTitle>
+            <AttachmentDescription>TypeScript · 12 KB</AttachmentDescription>
+          </AttachmentContent>
+          <AttachmentActions>
+            <AttachmentAction aria-label="Remove message-renderer.tsx">
+              <RiCloseLine />
+            </AttachmentAction>
+          </AttachmentActions>
+        </Attachment>
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -13,29 +13,8 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { RiArrowRightSLine, RiArrowUpDownLine } from "@remixicon/react";
+import { RiArrowUpDownLine } from "@remixicon/react";
 import React from "react";
-
-const faqs = [
-  {
-    id: "fees",
-    question: "What does a transfer cost?",
-    answer:
-      "Domestic transfers are free above $500. Below that a flat $1.20 applies and is itemised on the receipt.",
-  },
-  {
-    id: "timing",
-    question: "When do funds settle?",
-    answer:
-      "Standard transfers settle in two business days. Instant transfers settle within minutes for eligible banks.",
-  },
-  {
-    id: "limits",
-    question: "Are there payout limits?",
-    answer:
-      "The default is $25,000 per day. Raise it from workspace settings after identity verification completes.",
-  },
-];
 
 export function CollapsibleCard() {
   const [isOpen, setIsOpen] = React.useState(false);
