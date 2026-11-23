@@ -48,7 +48,7 @@ export function SavingsTargets() {
         </CardHeader>
         <CardContent>
           <ItemGroup className="gap-3">
-            <Item variant="muted" className="flex-col items-stretch">
+            <Item variant="muted" className="">
               <ItemContent className="gap-3">
                 <ItemDescription className="font-heading text-xs font-medium tracking-wider text-muted-foreground uppercase">
                   Retirement
@@ -67,7 +67,7 @@ export function SavingsTargets() {
                 </span>
               </ItemFooter>
             </Item>
-            <Item variant="muted" className="flex-col items-stretch">
+            <Item variant="muted" className="">
               <ItemContent className="gap-3">
                 <ItemDescription className="font-heading text-xs font-medium tracking-wider text-muted-foreground uppercase">
                   Real Estate
@@ -145,7 +145,7 @@ export function SavingsTargets() {
         <CardFooter className="flex-col gap-3">
           <Button className="w-full">Review Order</Button>
           <CardDescription className="text-center">
-            Trades are typically executed within minutes during market hours.
+            Trades are typically executed within minutes.
           </CardDescription>
         </CardFooter>
       </Card>
