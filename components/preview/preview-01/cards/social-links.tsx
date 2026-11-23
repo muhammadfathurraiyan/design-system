@@ -42,7 +42,7 @@ export function SocialLinks() {
               </InputGroupAddon>
               <InputGroupInput
                 id="instagram-handle"
-                defaultValue="@julianduryea_music"
+                defaultValue="@muhammadfathurraiyan"
               />
             </InputGroup>
           </Field>

@@ -19,7 +19,10 @@ export function DesignSystemPreview({ className }: { className?: string }) {
 
   return (
     <div
-      className={cn("ring-foreground/10 relative rounded-2xl ring", className)}
+      className={cn(
+        "relative w-full overflow-clip rounded-2xl border",
+        className,
+      )}
     >
       {active === "preview-01" ? <Preview01 /> : <Preview02 />}
 
